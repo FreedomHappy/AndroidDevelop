@@ -1,13 +1,12 @@
 # Lab2_layout
 
 ### linear layout
-![Alt text](https://github.com/FreedomHappy/AndroidDevelop/blob/master/Lab2_layout/images/linearlayout.png)
+<img src="https://github.com/FreedomHappy/AndroidDevelop/blob/master/Lab2_layout/images/linearlayout.png" width = "50%" height = "50%" div align=center />
 
 ---
 ### constraint layout
-![Alt text](https://github.com/FreedomHappy/AndroidDevelop/blob/master/Lab2_layout/images/constraintlayout.png)
-
+<img src="https://github.com/FreedomHappy/AndroidDevelop/blob/master/Lab2_layout/images/constraintlayout.png" width = "50%" height = "50%" div align=center />
 ---
 
 ### table layout
-![Alt text](https://github.com/FreedomHappy/AndroidDevelop/blob/master/Lab2_layout/images/tablelayout.png)
+<img src="https://github.com/FreedomHappy/AndroidDevelop/blob/master/Lab2_layout/images/tablelayout.png" width = "50%" height = "50%" div align=center />
