@@ -1,5 +1,7 @@
 # AndroidLab
+[Lab1][#lab1]
 ## Lab1 HelloWorld! & ActivityLifecycle
+<span id="lab1"></span>
 ### HelloWorld!
 <img src="https://github.com/FreedomHappy/AndroidDevelop/blob/master/AndroidLab/images/hello.png" width = "30%" height = "30%" div align=center />
 
