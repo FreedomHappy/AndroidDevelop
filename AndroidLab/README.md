@@ -1,8 +1,8 @@
 
 # AndroidLab
-[Lab1](#lab1) HelloWorld! & ActivityLifecycle
+[Lab1 HelloWorld! & ActivityLifecycle](#lab1) 
 
-[Lab2](#Lab2) Layout 布局实验
+[Lab2 Layout 布局实验](#Lab2) 
 
 
 ## Lab1 
