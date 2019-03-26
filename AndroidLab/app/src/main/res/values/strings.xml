@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AndroidLab</string>
+    <string name="signin">signin</string>
+    <string name="cancel">cancel</string>
 </resources>

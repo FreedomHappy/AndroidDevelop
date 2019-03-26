@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ActivityLifecycle"></activity>
+        <activity android:name=".ContextualMenuActivity"></activity>
+        <activity android:name=".MenuTest" />
+        <activity android:name=".AlertDialogActivity" />
+        <activity android:name=".ListViewActivity" />
+        <activity android:name=".ActivityLifecycle" />
         <activity android:name=".HelloWorld" />
         <activity android:name=".ConstraintActivity" />
         <activity android:name=".TableActivity" />
