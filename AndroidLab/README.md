@@ -98,7 +98,7 @@ UI component
 * Screenshot
 <img src="https://github.com/FreedomHappy/AndroidDevelop/blob/master/AndroidLab/images/alertdialog.png" width = "30%" height = "30%" div align=center />
 
-### OptionMenu [JavaFile](https://github.com/FreedomHappy/AndroidDevelop/blob/master/AndroidLab/app/src/main/java/com/example/androidlab/MenuTest.java)[OptionMenu_xml](https://github.com/FreedomHappy/AndroidDevelop/blob/master/AndroidLab/app/src/main/res/menu/menu_with_xml.xml)
+### OptionMenu [JavaFile](https://github.com/FreedomHappy/AndroidDevelop/blob/master/AndroidLab/app/src/main/java/com/example/androidlab/MenuTest.java)[     OptionMenu_xml](https://github.com/FreedomHappy/AndroidDevelop/blob/master/AndroidLab/app/src/main/res/menu/menu_with_xml.xml)
 * Primary Code
 ```java
 @Override
@@ -141,7 +141,7 @@ UI component
 
 <img src="https://github.com/FreedomHappy/AndroidDevelop/blob/master/AndroidLab/images/optionmenu3.png" width = "30%" height = "30%" div align=center />  <img src="https://github.com/FreedomHappy/AndroidDevelop/blob/master/AndroidLab/images/optionmenu4.png" width = "30%" height = "30%" div align=center />
 
-### Contextual Menu [JavaFile](https://github.com/FreedomHappy/AndroidDevelop/blob/master/AndroidLab/app/src/main/java/com/example/androidlab/ContextualMenuActivity.java)[    ContextualMenu_xml](https://github.com/FreedomHappy/AndroidDevelop/blob/master/AndroidLab/app/src/main/res/menu/contextual_menu.xml)
+### Contextual Menu [JavaFile](https://github.com/FreedomHappy/AndroidDevelop/blob/master/AndroidLab/app/src/main/java/com/example/androidlab/ContextualMenuActivity.java)  [    ContextualMenu_xml](https://github.com/FreedomHappy/AndroidDevelop/blob/master/AndroidLab/app/src/main/res/menu/contextual_menu.xml)
 * Primary Code
 ```java
         list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
