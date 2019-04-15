@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:key="in-linePreference_category"
+        android:title="In-line Preferences">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="check_box_preference_1"
+            android:summary="this is a check box"
+            android:title="Checkbox preference" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="dialog-basedPreferences_category"
+        android:title="Dialog-based preferences">
+        <EditTextPreference
+            android:defaultValue="false"
+            android:dialogTitle="Enter your favourite animal"
+            android:key="edit_text_preference_1"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:summary="An example that uses edit text dialog "
+            android:title="Edit text preference" />
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/settings_list_preference_titles"
+            android:entryValues="@array/settings_list_preference_titles"
+            android:key="list_preference_1"
+            android:title="List preference" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="launchPreferences_category"
+        android:title="Launch preferences">
+        <Preference
+            android:fragment="com.example.androidlab.PreferenceActivity$newFragment"
+            android:key="screenPreferencs"
+            android:title="Screen preference"
+            android:summary="show another screen of preferences"/>
+        <Preference
+            android:key="webpage"
+            android:title="Intent preference"
+            android:summary="Launchs an Activity from an Intent">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="http://www.baidu.com" />
+        </Preference>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="preferenceAttributes_category"
+        android:title="Preference attributes">
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="parent_check_box_preference"
+            android:title="Parent check box preference"
+            android:summary="This is visually a parent"/>
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="child_check_box_preference"
+            android:title="Child check box preference"
+            android:summary="This is visually a child"
+            android:dependency="parent_check_box_preference"/>
+    </PreferenceCategory>
+    <SwitchPreferenceCompat
+        android:key="notifications"
+        android:title="Enable message notifications"/>
+    <Preference
+        android:key="feedback"
+        android:title="Send feedback"
+        android:summary="Report technical issues or suggest new features"/>
+</PreferenceScreen>

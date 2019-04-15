@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TickNote</string>
+    <string name="addBtn_text">add</string>
+    <string name="noteListText_text">NoteList</string>
+</resources>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.androidlab">
+    package="com.example.ticknote">
 
     <application
         android:allowBackup="true"
@@ -9,16 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PreferenceActivity"></activity>
-        <activity android:name=".ContextualMenuActivity" />
-        <activity android:name=".MenuTest" />
-        <activity android:name=".AlertDialogActivity" />
-        <activity android:name=".ListViewActivity" />
-        <activity android:name=".ActivityLifecycle" />
-        <activity android:name=".HelloWorld" />
-        <activity android:name=".ConstraintActivity" />
-        <activity android:name=".TableActivity" />
-        <activity android:name=".LinearActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
