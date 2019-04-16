@@ -6,6 +6,7 @@
 
 [Lab3 UI Component](#lab3)
 
+[Lab4 扩展的Activity](#lab4)
 ## Lab1 
 HelloWorld! & ActivityLifecycle 
 ### HelloWorld!
@@ -214,3 +215,163 @@ UI component
 ```
 * Screenshot
 <img src="https://github.com/FreedomHappy/AndroidDevelop/blob/master/AndroidLab/images/contextualmenu.png" width = "30%" height = "30%" div align=center />
+
+## Lab4
+扩展的Activity
+[PreferenceActivity.java](https://github.com/FreedomHappy/AndroidDevelop/blob/master/AndroidLab/app/src/main/java/com/example/androidlab/PreferenceActivity.java)
+[res/xml/preference.xml](https://github.com/FreedomHappy/AndroidDevelop/blob/master/AndroidLab/app/src/main/res/xml/preference.xml)
+* Screenshot
+
+<img src="https://github.com/FreedomHappy/AndroidDevelop/blob/master/AndroidLab/images/preference1.png" width = "30%" height = "30%" div align=center />    <img src="https://github.com/FreedomHappy/AndroidDevelop/blob/master/AndroidLab/images/preference2.png" width = "30%" height = "30%" div align=center />
+### Edit Preference
+* xml code
+
+res/xml/preference.xml
+```xml
+<EditTextPreference
+            android:defaultValue="false"
+            android:dialogTitle="Enter your favourite animal"
+            android:key="edit_text_preference_1"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:summary="An example that uses edit text dialog "
+            android:title="Edit text preference" />
+```
+
+* Screenshot
+
+<img src="https://github.com/FreedomHappy/AndroidDevelop/blob/master/AndroidLab/images/editPref.png" width = "30%" height = "30%" div align=center />
+
+### List Preference
+* xml code
+
+res/xml/preference.xml
+```xml
+<ListPreference
+            android:defaultValue="1"
+            android:entries="@array/settings_list_preference_titles"
+            android:entryValues="@array/settings_list_preference_titles"
+            android:key="list_preference_1"
+            android:title="List preference" />
+```
+[res/values/arrays.xml](https://github.com/FreedomHappy/AndroidDevelop/blob/master/AndroidLab/app/src/main/res/values/arrays.xml)
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="settings_list_preference_titles">
+        <item>Alpha Option 01</item>
+        <item>Beta Option 02</item>
+        <item>Charlie Option 03</item>
+    </string-array>
+</resources>
+```
+* Screenshot
+
+<img src="https://github.com/FreedomHappy/AndroidDevelop/blob/master/AndroidLab/images/listPref.png" width = "30%" height = "30%" div align=center />
+
+
+### Screen preference
+
+* java code
+
+PreferenceActivity.java
+```java
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_preference);
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.settings_container, new MySettingsFragment())
+                .commit();
+    }
+
+    @Override
+    public boolean onPreferenceStartFragment(PreferenceFragmentCompat caller, Preference pref) {
+        // Instantiate the new Fragment
+        final Bundle args = pref.getExtras();
+        final Fragment fragment = new newFragment();
+        fragment.setArguments(args);
+        fragment.setTargetFragment(caller, 0);
+        // Replace the existing Fragment with the new Fragment
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.settings_container, fragment)
+                .addToBackStack(null)
+                .commit();
+        return true;
+    }
+    public static class MySettingsFragment extends PreferenceFragmentCompat {
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            setPreferencesFromResource(R.xml.preference, rootKey);
+        }
+    }
+    public static class newFragment extends PreferenceFragmentCompat{
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState,String rootKey){
+            setPreferencesFromResource(R.xml.newprefernce,rootKey);
+        }
+    }
+```
+* xml code
+
+res/xml/preference.xml
+```xml
+<Preference
+            android:fragment="com.example.androidlab.PreferenceActivity$newFragment"
+            android:key="screenPreferencs"
+            android:title="Screen preference"
+            android:summary="show another screen of preferences"/>
+```
+[res/xml/newPreference.xml](https://github.com/FreedomHappy/AndroidDevelop/blob/master/AndroidLab/app/src/main/res/xml/newprefernce.xml)
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="toggle_preference"
+        android:summary="Preference that is on the next screen but same hierarchy"
+        android:title="Toggle Preference" />
+</PreferenceScreen>
+```
+* Screenshot
+
+<img src="https://github.com/FreedomHappy/AndroidDevelop/blob/master/AndroidLab/images/preLaunch.png" width = "30%" height = "30%" div align=center />
+
+### Intent Preference
+* xml code
+
+res/xml/preference.xml
+```xml
+<Preference
+            android:key="webpage"
+            android:title="Intent preference"
+            android:summary="Launchs an Activity from an Intent">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="http://www.baidu.com" />
+</Preference>
+```
+
+### Preference attributes
+* xml code
+
+res/xml/preference.xml
+```xml
+<CheckBoxPreference
+            android:defaultValue="false"
+            android:key="parent_check_box_preference"
+            android:title="Parent check box preference"
+            android:summary="This is visually a parent"/>
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="child_check_box_preference"
+            android:title="Child check box preference"
+            android:summary="This is visually a child"
+            android:dependency="parent_check_box_preference"/>
+```
+* Screenshot 
+
+<img src="https://github.com/FreedomHappy/AndroidDevelop/blob/master/AndroidLab/images/preDependecy1.png" width = "30%" height = "30%" div align=center />   <img src="https://github.com/FreedomHappy/AndroidDevelop/blob/master/AndroidLab/images/preDependecy2.png" width = "30%" height = "30%" div align=center />
