@@ -7,6 +7,8 @@
 [Lab3 UI Component](#lab3)
 
 [Lab4 扩展的Activity](#lab4)
+
+[Lab5 intent](#lab5)
 ## Lab1 
 HelloWorld! & ActivityLifecycle 
 ### HelloWorld!
@@ -375,3 +377,60 @@ res/xml/preference.xml
 * Screenshot 
 
 <img src="https://github.com/FreedomHappy/AndroidDevelop/blob/master/AndroidLab/images/preDependecy1.png" width = "30%" height = "30%" div align=center />   <img src="https://github.com/FreedomHappy/AndroidDevelop/blob/master/AndroidLab/images/preDependecy2.png" width = "30%" height = "30%" div align=center />
+
+## Lab5
+intent and webview
+* [AndroidLab/.../webview.java](https://github.com/FreedomHappy/AndroidDevelop/blob/master/AndroidLab/app/src/main/java/com/example/androidlab/webview.java)
+```java
+public void ToWebview(View view){
+        EditText edt = findViewById(R.id.webviewEdt);
+        String text =  edt.getText().toString();
+        if (!text.isEmpty()) {
+            // Create the text message with a string
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra("msg", text);
+            sendIntent.setType("text/plain");
+
+            // Verify that the intent will resolve to an activity
+            if (sendIntent.resolveActivity(getPackageManager()) != null) {
+                startActivity(sendIntent);
+            }
+        }
+    }
+```
+* [MyBrowser/.../MainActivity.java](https://github.com/FreedomHappy/AndroidDevelop/blob/master/MyBrowser/app/src/main/java/com/example/mybrowser/MainActivity.java)
+```java
+@Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        WebView myWebView = (WebView) findViewById(R.id.webview);
+        WebSettings webSettings = myWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        Intent intent = getIntent();
+        String  uri = "http://www.baidu.com";
+        if (intent!=null){
+            String msg = intent.getStringExtra("msg");
+            if (!(msg==null||msg.isEmpty())){
+                uri = msg;
+            }
+        }
+        //如果访问的页面中有 Javascript,则 WebView 必须设置支持 Javascript。
+        myWebView.getSettings().setJavaScriptEnabled(true);
+        // 如果页面中链接,如果希望点击链接继续在当前browser中响应,
+        // 而不是新开Android的系统browser中响应该链接,必须覆盖 WebView的WebViewClient对象。
+        myWebView.setWebViewClient(new WebViewClient(){
+            public boolean shouldOverrideUrlLoading(WebView view, String url){
+                view.loadUrl(url);
+                return true;
+            }
+        });
+        myWebView.loadUrl(uri);
+    }
+```
+
+* Screenshot
+
+<img src="https://github.com/FreedomHappy/AndroidDevelop/blob/master/AndroidLab/images/intent1.png" width = "30%" height = "30%" div align=center />     <img src="https://github.com/FreedomHappy/AndroidDevelop/blob/master/AndroidLab/images/mybrowser.png" width = "30%" height = "30%" div align=center />
+
