@@ -90,4 +90,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, PreferenceActivity.class);
         startActivity(intent);
     }
+    public void ToWebview(View view){
+        Intent intent = new Intent(this, webview.class);
+        startActivity(intent);
+    }
 }
