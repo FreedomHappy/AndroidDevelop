@@ -430,6 +430,24 @@ public void ToWebview(View view){
     }
 ```
 
+* [MyBrowser/.../AndroidManifest.xml](https://github.com/FreedomHappy/AndroidDevelop/blob/master/MyBrowser/app/src/main/AndroidManifest.xml)
+
+```xml
+<activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="text/plain"/>
+            </intent-filter>
+</activity>
+```
+
+
 * Screenshot
 
 <img src="https://github.com/FreedomHappy/AndroidDevelop/blob/master/AndroidLab/images/intent1.png" width = "30%" height = "30%" div align=center />     <img src="https://github.com/FreedomHappy/AndroidDevelop/blob/master/AndroidLab/images/mybrowser.png" width = "30%" height = "30%" div align=center />
