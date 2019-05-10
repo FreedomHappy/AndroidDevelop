@@ -9,13 +9,83 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+
+
+        <provider
+            android:name=".TickNoteProvider"
+            android:authorities="com.example.ticknote.provider"
+            android:exported="false">
+            <grant-uri-permission android:pathPattern=".*" />
+        </provider>
+
+        <activity android:name=".NoteEdit">
+
+            <!--
+                 This filter says that we can view or edit the data of
+                 a single note
+            -->
+            <intent-filter android:label="@string/resolve_edit">
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="com.android.notepad.action.EDIT_NOTE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.com.example.provider.ticknote" />
+            </intent-filter>
+
+            <!--
+                 This filter says that we can create a new note inside
+                 of a directory of notes.  The INSERT action creates an
+                 empty note; the PASTE action initializes a new note from
+                 the current contents of the clipboard.
+            -->
+            <intent-filter>
+                <action android:name="android.intent.action.INSERT" />
+                <action android:name="android.intent.action.PASTE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.dir/vnd.com.example.provider.ticknote" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".NotesList">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.EDIT" />
+                <action android:name="android.intent.action.PICK" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.com.example.provider.ticknote" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.GET_CONTENT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.com.example.provider.ticknote" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
         </activity>
+
+        <activity android:name=".SearchResultActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".DemoNoteEdit" />
+        <activity android:name=".DemoNoteListActivity" />
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>

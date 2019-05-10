@@ -2,4 +2,15 @@
     <string name="app_name">TickNote</string>
     <string name="addBtn_text">add</string>
     <string name="noteListText_text">NoteList</string>
+
+    <string name="title_edit">Edit: %1$s</string>
+    <string name="title_create">New note</string>
+
+    <string name="search_hint">search by title</string>
+
+    <string name="resolve_edit">Edit note</string>
+    <string name="resolve_title">Edit title</string>
+
+    <string name="error_title">Error</string>
+    <string name="error_message">Error loading note</string>
 </resources>
