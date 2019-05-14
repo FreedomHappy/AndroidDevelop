@@ -173,4 +173,28 @@ private Cursor getCursor(String str) {
         return mCursor;
     }
 ```
+* Screen shot
 
+## Extended Features
+### 1.switch editing's page background color
+implement in [NoteEdit.java](https://github.com/FreedomHappy/AndroidDevelop/blob/master/TickNote/app/src/main/java/com/example/ticknote/NoteEdit.java)
+* Step one : use AlertDialog interacting with users
+[back_color_alert_dialog.xml](https://github.com/FreedomHappy/AndroidDevelop/blob/master/TickNote/app/src/main/res/layout/back_color_alert_dialog.xml)
+
+BuildAlertDialog()
+```java
+public void BuildAlertDialog(){
+        // Use the Builder class for convenient dialog construction
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        // Get the layout inflater
+        LayoutInflater inflater = this.getLayoutInflater();
+
+        // Inflate and set the layout for the dialog
+        // Pass null as the parent view because its going in the dialog layout
+        builder.setView(inflater.inflate(R.layout.back_color_alert_dialog, null));
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+```
+
+### 2. note list order
