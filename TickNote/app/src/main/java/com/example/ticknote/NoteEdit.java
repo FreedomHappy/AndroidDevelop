@@ -1,23 +1,30 @@
 package com.example.ticknote;
 
+import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.net.Uri;
+import android.support.constraint.ConstraintLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatEditText;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -58,6 +65,8 @@ public class NoteEdit extends AppCompatActivity {
     private Cursor mCursor;
     private EditText mText;
     private String mOriginalContent;
+    private View mEditScreen;
+    private String mScreenColor="ScreenColor";
 
     /**
      * Defines a custom EditText View that draws lines between each line of text that is displayed.
@@ -213,8 +222,17 @@ public class NoteEdit extends AppCompatActivity {
         if (savedInstanceState != null) {
             mOriginalContent = savedInstanceState.getString(ORIGINAL_CONTENT);
         }
+
+        initScreenColor();
     }
 
+    public void initScreenColor(){
+        mEditScreen = findViewById(R.id.edit_screen);
+        SharedPreferences pref = getSharedPreferences("data",
+                MODE_PRIVATE);
+        mEditScreen.setBackgroundColor(ContextCompat.getColor(this,
+                pref.getInt(mScreenColor,R.color.color_white)));
+    }
     /**
      * This method is called when the Activity is about to come to the foreground. This happens
      * when the Activity comes to the top of the task stack, OR when it is first starting.
@@ -281,6 +299,7 @@ public class NoteEdit extends AppCompatActivity {
             setTitle(getText(R.string.error_title));
             mText.setText(getText(R.string.error_message));
         }
+        initScreenColor();
     }
 
     /**
@@ -375,12 +394,46 @@ public class NoteEdit extends AppCompatActivity {
             case R.id.app_bar_edit_cancel:
                 cancelNote();
                 return true;
+            case R.id.app_bar_edit_set_background:
+                BuildAlertDialog();
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+    public void BuildAlertDialog(){
+        // Use the Builder class for convenient dialog construction
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        // Get the layout inflater
+        LayoutInflater inflater = this.getLayoutInflater();
 
-
+        // Inflate and set the layout for the dialog
+        // Pass null as the parent view because its going in the dialog layout
+        builder.setView(inflater.inflate(R.layout.back_color_alert_dialog, null));
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+    public void onChangeBackgroundColor(View v){
+        mEditScreen = findViewById(R.id.edit_screen);
+        SharedPreferences.Editor editor = getSharedPreferences("data",
+                MODE_PRIVATE).edit();
+        switch (v.getId()){
+            case R.id.blue_btn:
+                mEditScreen.setBackgroundColor(ContextCompat.getColor(this, R.color.color_blue));
+                editor.putInt(mScreenColor,R.color.color_blue);
+                editor.commit();
+                return;
+            case R.id.white_btn:
+                mEditScreen.setBackgroundColor(ContextCompat.getColor(this, R.color.color_white));
+                editor.putInt(mScreenColor,R.color.color_white);
+                editor.commit();
+                return;
+            case R.id.green_btn:
+                mEditScreen.setBackgroundColor(ContextCompat.getColor(this,R.color.color_green));
+                editor.putInt(mScreenColor,R.color.color_green);
+                editor.commit();
+                return;
+        }
+    }
 //BEGIN_INCLUDE(paste)
     /**
      * A helper method that replaces the note's data with the contents of the clipboard.

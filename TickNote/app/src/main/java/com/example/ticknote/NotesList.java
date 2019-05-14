@@ -4,6 +4,7 @@ import android.app.SearchManager;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
@@ -45,7 +46,9 @@ public class NotesList extends AppCompatActivity {
 
     private ListView listview;
     private SimpleCursorAdapter mAdapter;
-
+    private String mListOrder="ListOrder";
+    private String mTitleOrder= "title DESC";
+    private String mDateOrder= TickNote.DEFAULT_SORT_ORDER;
     /**
      * onCreate is called when Android starts this Activity from scratch.
      */
@@ -105,12 +108,14 @@ public class NotesList extends AppCompatActivity {
          *
          * Please see the introductory note about performing provider operations on the UI thread.
          */
+        SharedPreferences pref = getSharedPreferences("data",
+                MODE_PRIVATE);
         Cursor cursor = managedQuery(
                 getIntent().getData(),            // Use the default content URI for the provider.
                 PROJECTION,                       // Return the note ID and title for each note.
                 null,                             // No where clause, return all records.
-                null,                             // No where clause, therefore no where column values.
-                TickNote.DEFAULT_SORT_ORDER  // Use the default sort order.
+                null,    // No where clause, therefore no where column values.
+                pref.getString(mListOrder,TickNote.DEFAULT_SORT_ORDER) // Use the default sort order.
         );
 
         /*
@@ -265,12 +270,37 @@ public class NotesList extends AppCompatActivity {
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        SharedPreferences.Editor editor = getSharedPreferences("data",
+                MODE_PRIVATE).edit();
+        Cursor cursor;
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.menu_add_note:
                 startActivity(new Intent(Intent.ACTION_INSERT, getIntent().getData()));
                 return true;
             case R.id.menu_search:
+                return true;
+            case R.id.menu_order_date:
+                cursor = managedQuery(
+                        getIntent().getData(),            // Use the default content URI for the provider.
+                        PROJECTION,                       // Return the note ID and title for each note.
+                        null,                             // No where clause, return all records.
+                        null,    // No where clause, therefore no where column values.
+                        mDateOrder // Use the default sort order.
+                );
+                mAdapter.swapCursor(cursor);
+                editor.putString(mListOrder,mDateOrder);
+                return true;
+            case R.id.menu_order_title:
+                cursor = managedQuery(
+                        getIntent().getData(),            // Use the default content URI for the provider.
+                        PROJECTION,                       // Return the note ID and title for each note.
+                        null,                             // No where clause, return all records.
+                        null,    // No where clause, therefore no where column values.
+                        mTitleOrder // Use the default sort order.
+                );
+                mAdapter.swapCursor(cursor);
+                editor.putString(mListOrder,mTitleOrder);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

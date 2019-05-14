@@ -13,4 +13,16 @@
         android:icon="@android:drawable/ic_input_add"
         android:title="addNote"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_order"
+        android:title="排序" >
+        <menu >
+            <item
+                android:id="@+id/menu_order_date"
+                android:title="修改时间" />
+            <item
+                android:id="@+id/menu_order_title"
+                android:title="标题" />
+        </menu>
+    </item>
 </menu>

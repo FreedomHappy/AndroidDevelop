@@ -12,4 +12,7 @@
         android:icon="@android:drawable/ic_menu_close_clear_cancel"
         android:title="cancel"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/app_bar_edit_set_background"
+        android:title="设置背景" />
 </menu>
