@@ -3,7 +3,9 @@
 ### 1.Timestamp
 * Step one : create date attribute
 
-I use SQLite to save note modified time. That needs to create a date column in table(TickNote: I define table in [NotesContract.java](https://github.com/FreedomHappy/AndroidDevelop/blob/master/TickNote/app/src/main/java/com/example/ticknote/NotesContract.java))
+I use SQLite to save note modified time. 
+
+That needs to create a date column in table(TickNote: I define table in [NotesContract.java](https://github.com/FreedomHappy/AndroidDevelop/blob/master/TickNote/app/src/main/java/com/example/ticknote/NotesContract.java))
 
 ```java
         public static final String TABLE_NAME = "ticknote";
@@ -13,6 +15,14 @@ I use SQLite to save note modified time. That needs to create a date column in t
 ```
 
 * Step two : save date ([NoteEdit.java](https://github.com/FreedomHappy/AndroidDevelop/blob/master/TickNote/app/src/main/java/com/example/ticknote/NoteEdit.java))
+
+```java
+        // Sets up a map to contain values to be updated in the provider.
+        ContentValues values = new ContentValues();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String date = sdf.format(System.currentTimeMillis());
+        values.put(TickNote.COLUMN_NAME_DATE, date);
+```
 
 * Step three : read date from SQLite
 
@@ -26,8 +36,10 @@ private static final String[] PROJECTION = new String[] {
     };
 ```
 Create a Cursor instance and use SimpleCursorAdapter for the listviwe([NotesList.java](https://github.com/FreedomHappy/AndroidDevelop/blob/master/TickNote/app/src/main/java/com/example/ticknote/NotesList.java)).
+
 I apply ContentProvider([TickNoteProvider.java](https://github.com/FreedomHappy/AndroidDevelop/blob/master/TickNote/app/src/main/java/com/example/ticknote/TickNoteProvider.java))
 to the application for data to read and write. 
+
 ``` java
         Cursor cursor = managedQuery(
                 getIntent().getData(),            // Use the default content URI for the provider.
@@ -49,3 +61,4 @@ to the application for data to read and write.
         );      
         
 ```
+* Screenshot
