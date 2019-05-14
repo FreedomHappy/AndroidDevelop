@@ -179,6 +179,7 @@ private Cursor getCursor(String str) {
 ### 1.switch editing's page background color
 implement in [NoteEdit.java](https://github.com/FreedomHappy/AndroidDevelop/blob/master/TickNote/app/src/main/java/com/example/ticknote/NoteEdit.java)
 * Step one : use AlertDialog interacting with users
+
 [back_color_alert_dialog.xml](https://github.com/FreedomHappy/AndroidDevelop/blob/master/TickNote/app/src/main/res/layout/back_color_alert_dialog.xml)
 
 BuildAlertDialog()
@@ -196,5 +197,42 @@ public void BuildAlertDialog(){
         alertDialog.show();
     }
 ```
+* Step two : use SharePreference to save
 
+get from SharePreference
+```java
+public void initScreenColor(){
+        mEditScreen = findViewById(R.id.edit_screen);
+        SharedPreferences pref = getSharedPreferences("data",
+                MODE_PRIVATE);
+        mEditScreen.setBackgroundColor(ContextCompat.getColor(this,
+                pref.getInt(mScreenColor,R.color.color_white)));
+    }
+```
+
+put into SharePreference
+```java
+public void onChangeBackgroundColor(View v){
+        mEditScreen = findViewById(R.id.edit_screen);
+        SharedPreferences.Editor editor = getSharedPreferences("data",
+                MODE_PRIVATE).edit();
+        switch (v.getId()){
+            case R.id.blue_btn:
+                mEditScreen.setBackgroundColor(ContextCompat.getColor(this, R.color.color_blue));
+                editor.putInt(mScreenColor,R.color.color_blue);
+                editor.commit();
+                return;
+            case R.id.white_btn:
+                mEditScreen.setBackgroundColor(ContextCompat.getColor(this, R.color.color_white));
+                editor.putInt(mScreenColor,R.color.color_white);
+                editor.commit();
+                return;
+            case R.id.green_btn:
+                mEditScreen.setBackgroundColor(ContextCompat.getColor(this,R.color.color_green));
+                editor.putInt(mScreenColor,R.color.color_green);
+                editor.commit();
+                return;
+        }
+    }
+```
 ### 2. note list order
