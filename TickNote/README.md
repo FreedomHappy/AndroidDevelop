@@ -62,6 +62,10 @@ to the application for data to read and write.
         
 ```
 * Screenshot
+
+<img src="https://github.com/FreedomHappy/AndroidDevelop/blob/master/TickNote/ReadmeImages/timesamp1.png" width = "30%" height = "30%" div align=center /> <img src="https://github.com/FreedomHappy/AndroidDevelop/blob/master/TickNote/ReadmeImages/timestamp2.png" width = "30%" height = "30%" div align=center /> 
+
+
 ### 2.Search note 
 * Step one : add search view
 
@@ -175,6 +179,8 @@ private Cursor getCursor(String str) {
 ```
 * Screen shot
 
+<img src="https://github.com/FreedomHappy/AndroidDevelop/blob/master/TickNote/ReadmeImages/search1.png" width = "30%" height = "30%" div align=center />     <img src="https://github.com/FreedomHappy/AndroidDevelop/blob/master/TickNote/ReadmeImages/search2.png" width = "30%" height = "30%" div align=center />
+
 ## Extended Features
 ### 1.switch editing's page background color
 implement in [NoteEdit.java](https://github.com/FreedomHappy/AndroidDevelop/blob/master/TickNote/app/src/main/java/com/example/ticknote/NoteEdit.java)
@@ -237,6 +243,8 @@ public void onChangeBackgroundColor(View v){
 ```
 * Screenshot
 
+<img src="https://github.com/FreedomHappy/AndroidDevelop/blob/master/TickNote/ReadmeImages/backgroundcolor.png" width = "30%" height = "30%" div align=center />     <img src="https://github.com/FreedomHappy/AndroidDevelop/blob/master/TickNote/ReadmeImages/color_green.png" width = "30%" height = "30%" div align=center />       <img src="https://github.com/FreedomHappy/AndroidDevelop/blob/master/TickNote/ReadmeImages/color_blue.png" width = "30%" height = "30%" div align=center />
+
 ### 2. note list order
 * Step one : define order type
 ```java
@@ -269,3 +277,5 @@ public void onChangeBackgroundColor(View v){
                 return true;
 ```
 * Screenshot
+
+<img src="https://github.com/FreedomHappy/AndroidDevelop/blob/master/TickNote/ReadmeImages/timestamp2.png" width = "30%" height = "30%" div align=center />    <img src="https://github.com/FreedomHappy/AndroidDevelop/blob/master/TickNote/ReadmeImages/ordertype.png" width = "30%" height = "30%" div align=center />    <img src="https://github.com/FreedomHappy/AndroidDevelop/blob/master/TickNote/ReadmeImages/titleorder.png" width = "30%" height = "30%" div align=center />
