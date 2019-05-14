@@ -91,3 +91,84 @@ add meta-data in [AndroidManifest.xml](https://github.com/FreedomHappy/AndroidDe
           android:name="android.app.searchable"
           android:resource="@xml/searchable" />
 ```
+
+* Step two : set filter
+implement in [NotesList.java](https://github.com/FreedomHappy/AndroidDevelop/blob/master/TickNote/app/src/main/java/com/example/ticknote/NotesList.java)
+Associate  searchable configuration with the SearchView
+```java
+/**
+     *  OptionsMenu 操作
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.notes_list_options_menu, menu);
+
+        /**
+         *Associate searchable configuration with the SearchView
+         */
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView =
+                (SearchView) menu.findItem(R.id.menu_search).getActionView();
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
+
+        searchView.setSubmitButtonEnabled(true);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
+            @Override
+            public boolean onQueryTextChange(String query) {
+                mAdapter.getFilter().filter(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                mAdapter.getFilter().filter(query);
+                return true;
+            }
+        });
+        return true;
+    }
+```
+
+set filter for search view
+```java
+        // set filter for search view
+        mAdapter.setFilterQueryProvider(new FilterQueryProvider() {
+            public Cursor runQuery(CharSequence constraint) {
+                return getCursor(constraint.toString());
+            }
+        });
+```
+create query way in getCursor(constrint.toString())
+```java
+private Cursor getCursor(String str) {
+        Cursor mCursor = null;
+        if (str == null  ||  str.length () == 0)  {
+            Uri uri = TickNote.CONTENT_URI;
+            String[] projection = new String[]{TickNote._ID,TickNote.COLUMN_NAME_TITLE,TickNote.COLUMN_NAME_DATE};
+            String selection = null;
+            String[] selectionArgs = null;
+            String sortOrder = TickNote.DEFAULT_SORT_ORDER;
+            mCursor = getContentResolver().query(uri, projection, selection, selectionArgs,
+                    sortOrder);
+        }
+        else {
+            Uri uri = TickNote.CONTENT_URI;
+            String[] projection = new String[]{TickNote._ID,TickNote.COLUMN_NAME_TITLE,TickNote.COLUMN_NAME_DATE};
+            String selection = "INSTR("+TickNote.COLUMN_NAME_TITLE+",?)>0";
+            String[] selectionArgs = {str};
+            String sortOrder = TickNote.DEFAULT_SORT_ORDER;
+            mCursor = getContentResolver().query(uri, projection, selection, selectionArgs,
+                    sortOrder);
+        }
+
+        if (mCursor != null) {
+            mCursor.moveToFirst();
+        }
+
+        return mCursor;
+    }
+```
+
