@@ -235,4 +235,37 @@ public void onChangeBackgroundColor(View v){
         }
     }
 ```
+* Screenshot
+
 ### 2. note list order
+* Step one : define order type
+```java
+    private String mTitleOrder= "title DESC";
+    private String mDateOrder= TickNote.DEFAULT_SORT_ORDER;
+```
+* Step two : use swapCursor(cursor)
+```java
+           case R.id.menu_order_date:
+                cursor = managedQuery(
+                        getIntent().getData(),            // Use the default content URI for the provider.
+                        PROJECTION,                       // Return the note ID and title for each note.
+                        null,                             // No where clause, return all records.
+                        null,    // No where clause, therefore no where column values.
+                        mDateOrder // Use the default sort order.
+                );
+                mAdapter.swapCursor(cursor);
+                editor.putString(mListOrder,mDateOrder);
+                return true;
+            case R.id.menu_order_title:
+                cursor = managedQuery(
+                        getIntent().getData(),            // Use the default content URI for the provider.
+                        PROJECTION,                       // Return the note ID and title for each note.
+                        null,                             // No where clause, return all records.
+                        null,    // No where clause, therefore no where column values.
+                        mTitleOrder // Use the default sort order.
+                );
+                mAdapter.swapCursor(cursor);
+                editor.putString(mListOrder,mTitleOrder);
+                return true;
+```
+* Screenshot
