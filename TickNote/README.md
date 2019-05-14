@@ -12,7 +12,9 @@ I use SQLite to save note modified time. That needs to create a date column in t
         public static final String COLUMN_NAME_DATE="date";
 ```
 
-* Step two : read date from SQLite
+* Step two : save date ([NoteEdit.java](https://github.com/FreedomHappy/AndroidDevelop/blob/master/TickNote/app/src/main/java/com/example/ticknote/NoteEdit.java))
+
+* Step three : read date from SQLite
 
 We need define a PROJECTION contains date attribute
 
@@ -24,7 +26,8 @@ private static final String[] PROJECTION = new String[] {
     };
 ```
 Create a Cursor instance and use SimpleCursorAdapter for the listviwe([NotesList.java](https://github.com/FreedomHappy/AndroidDevelop/blob/master/TickNote/app/src/main/java/com/example/ticknote/NotesList.java)).
-
+I apply ContentProvider([TickNoteProvider.java](https://github.com/FreedomHappy/AndroidDevelop/blob/master/TickNote/app/src/main/java/com/example/ticknote/TickNoteProvider.java))
+to the application for data to read and write. 
 ``` java
         Cursor cursor = managedQuery(
                 getIntent().getData(),            // Use the default content URI for the provider.
