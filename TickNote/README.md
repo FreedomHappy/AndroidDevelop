@@ -62,3 +62,32 @@ to the application for data to read and write.
         
 ```
 * Screenshot
+### 2.Search note 
+* Step one : add search view
+
+Define a search item in [notes_list_options_menu.xml](https://github.com/FreedomHappy/AndroidDevelop/blob/master/TickNote/app/src/main/res/menu/notes_list_options_menu.xml)
+
+```xml
+        <item
+        android:id="@+id/menu_search"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:title="Search"
+        app:actionViewClass="android.widget.SearchView"
+        app:showAsAction="always" />
+```
+
+create [searchable.xml](https://github.com/FreedomHappy/AndroidDevelop/blob/master/TickNote/app/src/main/res/xml/searchable.xml)
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<searchable xmlns:android="http://schemas.android.com/apk/res/android"
+    android:label="@string/app_name"
+    android:hint="@string/search_hint" />
+```
+add meta-data in [AndroidManifest.xml](https://github.com/FreedomHappy/AndroidDevelop/blob/master/TickNote/app/src/main/AndroidManifest.xml)
+
+```xml
+          <meta-data
+          android:name="android.app.searchable"
+          android:resource="@xml/searchable" />
+```
