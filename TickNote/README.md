@@ -93,7 +93,9 @@ add meta-data in [AndroidManifest.xml](https://github.com/FreedomHappy/AndroidDe
 ```
 
 * Step two : set filter
+
 implement in [NotesList.java](https://github.com/FreedomHappy/AndroidDevelop/blob/master/TickNote/app/src/main/java/com/example/ticknote/NotesList.java)
+
 Associate  searchable configuration with the SearchView
 ```java
 /**
